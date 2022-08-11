@@ -1,10 +1,11 @@
 from . import db
-# import enum
+import enum
 from flask_login import UserMixin
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import FlaskForm
+# from sqlalchemy.ext.declarative import declarative_base
 # from wtforms_sqlalchemy.fields import QuerySelectField
 
 class Note(db.Model):
@@ -13,18 +14,18 @@ class Note(db.Model):
     date = db.Column(db.DateTime(timezone=True), default=func.now())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
-# class Level(enum.Enum):
-#     siswa = "Siswa"
-#     guru = "Guru"
+class Level(enum.Enum):
+    siswa = "Siswa"
+    guru = "Guru"
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(150), unique=True)
     password = db.Column(db.String(150))
     first_name = db.Column(db.String(150))
-    level = db.Column(db.String(150))
-    # level = db.Column(db.Enum(Level))
+    level = db.Column(db.Enum(Level))
     notes = db.relationship('Note')
+    # level = db.Column(db.String(150))
 
 # class mapel(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)

@@ -32,76 +32,77 @@
 
     <title>{% block title %}Home{% endblock %}</title>
   </head>
-    <body onload="startTime()">
-      <script>
-        function startTime() {
-          const today = new Date();
-          let h = today.getHours();
-          let m = today.getMinutes();
-          let s = today.getSeconds();
-          m = checkTime(m);
-          s = checkTime(s);
-          document.getElementById('jam').innerHTML =  h + ":" + m + ":" + s;
-          setTimeout(startTime, 1000);
-        }
-        
-        function checkTime(i) {
-          if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
-          return i;
-        }
-        </script>
-      {% if user.is_authenticated %}
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+  <body onload="startTime()">
+  <script>
+    function startTime() {
+      const today = new Date();
+      let h = today.getHours();
+      let m = today.getMinutes();
+      let s = today.getSeconds();
+      m = checkTime(m);
+      s = checkTime(s);
+      document.getElementById('jam').innerHTML =  h + ":" + m + ":" + s;
+      setTimeout(startTime, 1000);
+    }
+    function checkTime(i) {
+      if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+      return i;
+    }
+  </script>
+  {% if user.is_authenticated %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar">
+      <span class="navbar-toggler-icon"></span>
+    </button>
       
-      <div class="collapse navbar-collapse" id="navbar">
-        
-        <div class="navbar-nav mr-auto">
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="Absensi" href="/absensi">Absensi</a>
-          
+    <!-- {% if current_user.level == 'Siswa' %}
+      <div class="theme-switch-wrapper">
+        <label class="theme-switch" for="checkbox"/>
+          <input type="checkbox" id="checkbox"/>
+          <div class="slider round"></div>
+        </label>
+      </div>
+    {% endif %} -->
+
+    <div class="collapse navbar-collapse" id="navbar">
+      <div class="navbar-nav mr-auto">
+        <a class="nav-item nav-link" id="home" href="/">Home</a>
+        <a class="nav-item nav-link" id="Absensi" href="/absensi">Absensi</a>
+
           <!-- <a class="nav-item nav-link" id="login" href="/login">Login</a> -->
           <!-- <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a> -->
-        </div>
-        <div class="mx-auto order-0">
-          <a class="navbar-brand mx-auto" id="jam"></a>
       </div>
-        <div class="navbar-nav ml-auto">
-          <!-- <a class="nav-item nav-link" id="profil" href="/">Profil</a> -->
-          <!-- <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">USERNAME: {{ session.first_name }}</a> -->
-            <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
-          </li>
-          
-        </div>
-        
+      <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" id="jam"></a>
+      </div>
+      <div class="navbar-nav ml-auto">
+        <!-- <a class="nav-item nav-link" id="profil" href="/">Profil</a> -->
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">USERNAME: {{ session.first_name }}</a> -->
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+        <!-- </li> -->
+      </div>
     </nav>
     
     {% else %}
-      {% endif %}
+    {% endif %}
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
-    messages %} {% for category, message in messages %} {% if category ==
-    'error' %}
-    <div class="alert alert-danger alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
-    {% else %}
-    <div class="alert alert-success alter-dismissable fade show" role="alert">
-      {{ message }}
-      <button type="button" class="close" data-dismiss="alert">
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>
+      messages %} {% for category, message in messages %} {% if category ==
+        'error' %}
+        <div class="alert alert-danger alter-dismissable fade show" role="alert">
+          {{ message }}
+          <button type="button" class="close" data-dismiss="alert">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+      {% else %}
+      <div class="alert alert-success alter-dismissable fade show" role="alert">
+        {{ message }}
+        <button type="button" class="close" data-dismiss="alert">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
 
@@ -109,23 +110,19 @@
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
       integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
     <script
       src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
 
     <script
       type="text/javascript"
-      src="{{ url_for('static', filename='index.js') }}"
-    ></script>
+      src="{{ url_for('static', filename='index.js') }}"></script>
 
     
   </body>

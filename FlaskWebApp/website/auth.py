@@ -1,12 +1,12 @@
-from unicodedata import name
 from flask import Blueprint, render_template, request, flash, redirect, url_for
-from .models import User
+from .models import User, Level
 from werkzeug.security import generate_password_hash, check_password_hash
 from . import db
 from flask_login import login_user, login_required, logout_user, current_user
 
 
 auth = Blueprint('auth', __name__)
+
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
@@ -24,6 +24,7 @@ def login():
                 flash('Incorrect password, try again.', category='error')
         else:
             flash('Email does not exist.', category='error')
+        
 
     return render_template("login.html", user=current_user)
 
@@ -33,6 +34,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('auth.login'))
+
 
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
@@ -54,8 +56,6 @@ def sign_up():
             flash('Konfirmasi passwords tidak sesuai.', category='error')
         elif len(password1) < 7:
             flash('Password memiliki lebih dari 7 karakter.', category='error')
-
-
         else:
             new_user = User(email=email, first_name=first_name, password=generate_password_hash(
                 password1, method='sha256'))
