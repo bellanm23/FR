@@ -1,0 +1,11 @@
+{% extends "base.html" %} 
+{% block title %}Home{% endblock %} 
+{% block content %}
+
+<br>
+<h4 align="center">Absensi Kehadiran</h4>
+<center><img src="{{ url_for('views.video_feed')}}" width="60%" class="img-responsive" alt="Responsive image"></center>
+<h5 align="center">Silahkan absen dengan menunjukkan wajah ke Webcam <br> Jika nama sudah muncul, kamu telah melakukan presensi.<br>
+    Silahkan Lanjutkan aktivitas akademikamu </h5>
+
+{% endblock %}
